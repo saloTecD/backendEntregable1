@@ -8,13 +8,13 @@ class ProductManager {
         // this.writeToFile(this.products)
 
     }
-    writeToFile =(productos) => {
-        fs.writeFileSync(this.pathCustom, JSON.stringify(productos))
+    writeToFile = async (productos) => {
+        await fs.promises.writeFile(this.pathCustom, JSON.stringify(productos))
         console.log("Archivo Creado")
     }
 
-    readFromFile =  () => {
-        const productosFile =  fs.readFileSync(this.pathCustom, `utf-8`)
+    readFromFile =  async () => {
+        const productosFile = await fs.promises.readFile(this.pathCustom, `utf-8`)
         
         let productosFiles = JSON.parse(productosFile)
         
@@ -57,21 +57,21 @@ class ProductManager {
 
    
 
-    getProducts() {
+   async getProducts() {
         
-            const arreglo = this.readFromFile()
+            const arreglo = await this.readFromFile()
             console.log(arreglo)
             return arreglo
         }
        
-    getProductsLimit(n){
-        const arreglo = this.readFromFile()
+    async getProductsLimit(n){
+        const arreglo = await this.readFromFile()
         const arregloLimit=arreglo.slice(0,n)
         return arregloLimit
     }
 
-    getProductById(id) {
-        const arreglo = this.readFromFile()
+    async getProductById(id) {
+        const arreglo = await this.readFromFile()
         const elemento = arreglo.find(e => e.id === id)
         if (elemento === undefined) {
             console.log("Not found")

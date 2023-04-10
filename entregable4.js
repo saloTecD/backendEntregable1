@@ -8,21 +8,21 @@ const productManager=require ("./entregable1.js")
 
 
 
-server.get(`/products`, (req, res) => {
+server.get(`/products`, async (req, res) => {
 
     if (req.query.limit){
         let limit=parseInt(req.query.limit)
-        res.send(productManager.store.getProductsLimit(limit))
+        res.send(await productManager.store.getProductsLimit(limit))
     }
     else{
-        res.send(productManager.store.getProducts())
+        res.send(await productManager.store.getProducts())
     }
 })
 
-server.get(`/products/:pid`, (req, res) => {
+server.get(`/products/:pid`, async (req, res) => {
 
     let id=parseInt(req.params.pid)
-    res.send(productManager.store.getProductById(id))
+    res.send(await productManager.store.getProductById(id))
 
 })
 
