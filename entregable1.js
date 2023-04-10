@@ -5,7 +5,7 @@ class ProductManager {
     constructor(pathCustom) {
         this.products = [];
         this.pathCustom = pathCustom;
-        this.writeToFile(this.products)
+        // this.writeToFile(this.products)
 
     }
     writeToFile =(productos) => {
@@ -61,17 +61,24 @@ class ProductManager {
         
             const arreglo = this.readFromFile()
             console.log(arreglo)
+            return arreglo
         }
        
-    
+    getProductsLimit(n){
+        const arreglo = this.readFromFile()
+        const arregloLimit=arreglo.slice(0,n)
+        return arregloLimit
+    }
 
     getProductById(id) {
         const arreglo = this.readFromFile()
         const elemento = arreglo.find(e => e.id === id)
         if (elemento === undefined) {
             console.log("Not found")
+            return "Not Found"
         } else {
             console.log(elemento)
+            return elemento
         }
     }
 
@@ -110,21 +117,35 @@ class ProductManager {
 }
 
 const store = new ProductManager(`./productos.json`)
-store.getProducts()
-console.log("----------------------------------------")
-store.addProduct("productoPrueba1", "desc1", 600, "ruta de prueba", "1abc", 600)
-console.log("----------------------------------------")
-store.getProducts()
-console.log("----------------------------------------")
-store.addProduct("productoPrueba2", "descripcion de prueba", 600, "ruta de prueba", "1abcd", 600)
-console.log("----------------------------------------")
-store.addProduct("productoPrueba3", "descripcion de prueba", 600, "ruta de prueba", "1abcde", 600)
-console.log("----------------------------------------")
-store.getProductById(1)
-console.log("----------------------------------------")
-store.getProductById(2)
-console.log("----------------------------------------")
-store.getProductById(4)
-console.log("----------------------------------------")
-store.updateProduct(1,{price:200,description:"hola",code:"hhhh"})
-store.deleteProduct(4)
+
+module.exports={store}
+
+
+//Metodos de prueba, se dejan comentados para futuros tests
+
+// store.getProducts()
+// console.log("----------------------------------------")
+// store.addProduct("productoPrueba1", "desc1", 100, "ruta de prueba", "1abc", 10)
+// console.log("----------------------------------------")
+// store.getProducts()
+// console.log("----------------------------------------")
+// store.addProduct("productoPrueba2", "descripcion de prueba2", 200, "ruta de prueba2", "1abcd", 20)
+// console.log("----------------------------------------")
+// store.addProduct("productoPrueba3", "descripcion de prueba3", 300, "ruta de prueba3", "3abcde", 30)
+// store.addProduct("productoPrueba4", "descripcion de prueba4", 400, "ruta de prueba4", "4abcde", 40)
+// store.addProduct("productoPrueba5", "descripcion de prueba5", 500, "ruta de prueba5", "5abcde", 50)
+// store.addProduct("productoPrueba6", "descripcion de prueba6", 600, "ruta de prueba6", "6abcde", 60)
+// store.addProduct("productoPrueba7", "descripcion de prueba7", 700, "ruta de prueba7", "7abcde", 70)
+// store.addProduct("productoPrueba8", "descripcion de prueba8", 800, "ruta de prueba8", "8abcde", 80)
+// store.addProduct("productoPrueba9", "descripcion de prueba9", 900, "ruta de prueba9", "9abcde", 90)
+// store.addProduct("productoPrueba10", "descripcion de prueba10", 1000, "ruta de prueba10", "10abcde", 100)
+// console.log("----------------------------------------")
+// store.getProductById(1)
+// console.log("----------------------------------------")
+// store.getProductById(2)
+// console.log("----------------------------------------")
+// store.getProductById(4)
+// console.log("----------------------------------------")
+// store.updateProduct(1,{price:200,description:"hola",code:"hhhh"})
+// store.deleteProduct(4)
+
